@@ -25,8 +25,8 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('nota/tracking', 'NotaController@tracking');
-Route::post('nota/tracking', 'NotaController@trackingProcess');
+// Route::get('nota/tracking', 'NotaController@tracking');
+// Route::post('nota/tracking', 'NotaController@trackingProcess');
 
 Route::group(['middleware' => 'auth'], function() {
 
@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('delete/{id}', 'MekanikController@delete');
     });
 
-    Route::group(['prefix' => 'service', 'middleware' => 'actor:owner'], function() {
+    Route::group(['prefix' => 'service', 'middleware' => 'actor:owner,admin,member'], function() {
         Route::get('', 'ServiceController@index');
         Route::get('form/{type}/{id?}', 'ServiceController@form');
         Route::post('store', 'ServiceController@store');
@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('delete/{id}', 'ServiceController@delete');
     });
 
-    Route::group(['prefix' => 'service-barang', 'middleware' => 'actor:owner,admin'], function() {
+    Route::group(['prefix' => 'service-barang', 'middleware' => 'actor:owner,admin,member'], function() {
         Route::get('', 'ServiceBarangController@index');
         Route::get('order', 'ServiceBarangController@order');
         Route::get('form/create', 'ServiceBarangController@form');
@@ -97,6 +97,13 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => 'barang'], function() {
             Route::post('list-by-nota', 'ServiceBarangController@listBarangByNota');
         });
+    });
+
+    Route::group(['prefix' => 'service_motor', 'middleware' => 'actor:member'], function() {
+        Route::get('order', 'ServiceMotorController@order');
+        Route::get('list', 'ServiceMotorController@list');
+        Route::post('store-order', 'ServiceMotorController@storeOrder');
+        Route::post('list', 'ServiceMotorController@list');
     });
 
     Route::group(['prefix' => 'produk-transaksi', 'middleware' => 'actor:owner,admin'], function() {

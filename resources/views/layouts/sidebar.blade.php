@@ -112,7 +112,12 @@
         </li>
     @endif
     @if (auth()->user()->hasAnyActors(['member']))
-        
+    <li class="nav-item">
+            <a class="nav-link" href="{{ url('service-barang/order') }} ">
+                <i class="fas fa-fw fa-home"></i>
+                <span>Order Service</span>
+            </a>
+        </li>
     @endif
     
     {{-- <!-- Nav Item - Utilities Collapse Menu -->

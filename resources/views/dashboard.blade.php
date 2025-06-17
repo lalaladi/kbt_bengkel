@@ -17,10 +17,11 @@
         </div>
 
 
-        <h2 class="text-lg font-bold mb-2">ADMIN</h2>
+        <h2 class="text-lg font-bold mb-2">{{ auth()->user()->nama }}</h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            @for ($i = 0; $i < 8; $i++)
+            @if (auth()->user()->hasAnyActors(['owner', 'admin']))
+                @for ($i = 0; $i < 8; $i++)
                 <div class="bg-white p-3 rounded-lg shadow">
                     <img src="{{ asset('img/item.jpg') }}" alt="Besi" class="w-full h-24 object-contain">
                     <h3 class="font-semibold text-gray-800 mt-2">Besi</h3>
@@ -32,7 +33,7 @@
                         </a>
                     </div>
                 </div>
-            @endfor
+                @endfor
         </div>
 
         <div class="flex justify-center mt-6">
@@ -40,5 +41,6 @@
                 Show more item
             </button>
         </div>
+        @endif
     </div>
 @endsection
