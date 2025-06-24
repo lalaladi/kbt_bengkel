@@ -24,6 +24,7 @@ Route::get('', function() {
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/status', [App\Http\Controllers\StatusController::class, 'index'])->name('status');
 
 // Route::get('nota/tracking', 'NotaController@tracking');
 // Route::post('nota/tracking', 'NotaController@trackingProcess');

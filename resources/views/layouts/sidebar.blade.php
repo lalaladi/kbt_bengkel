@@ -23,6 +23,13 @@
             <span>Dashboard</span>
         </a>
     </li>
+    <li class="nav-item">
+    <a class="nav-link" href="{{ route('status') }}">
+        <i class="fa fa-map-marker-alt"></i>
+        <span>Status</span>
+    </a>
+</li>
+
     @if (auth()->user()->is_owner)
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
